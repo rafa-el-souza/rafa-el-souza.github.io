@@ -1,0 +1,7 @@
+baseURL = 'https://rafa-el-souza.github.io/'
+locale = 'en-us'
+title = 'Rafael Souza'
+theme = 'congo'
+
+[params]
+  colorScheme = 'congo'
