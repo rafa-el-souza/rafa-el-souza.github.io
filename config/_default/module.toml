@@ -1,0 +1,6 @@
+# Hugo version requirement, enforced by Hugo itself at build time.
+# Congo compiles SCSS, so the extended edition is mandatory: a standard build
+# would fail on the stylesheets rather than warn.
+[hugoVersion]
+  extended = true
+  min = "0.164.0"
