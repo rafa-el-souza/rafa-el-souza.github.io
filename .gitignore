@@ -1,4 +1,20 @@
+# Hugo build output and caches
 /public/
 /resources/
 /.hugo_build.lock
 /.hugo-cache/
+
+# Editor and IDE directories
+/.idea
+/.vscode
+*.swp
+
+# Local agent and tooling configuration - machine-specific, never committed
+/.claude
+/.mcp.json
+/.no-mistakes.yaml
+/treehouse.toml
+
+# OS metadata
+.DS_Store
+Thumbs.db
