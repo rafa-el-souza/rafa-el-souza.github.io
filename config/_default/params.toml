@@ -9,6 +9,13 @@ colorScheme = "congo"
 # with the theme, so no script is fetched from anywhere else.
 enableSearch = true
 
+[header]
+  # The theme's default header wraps the menu into a column on narrow screens,
+  # which on a phone pushes the page title below six stacked rows before any
+  # content starts. "hybrid" keeps the full menu on wide screens and collapses
+  # it behind a button below the theme's 640px breakpoint.
+  layout = "hybrid"
+
 [homepage]
   # The built-in profile layout: name, headline, links, then the page body.
   layout = "profile"
