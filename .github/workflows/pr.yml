@@ -1,0 +1,60 @@
+name: PR check
+
+# The gate every change passes before it can be merged. It runs the same build
+# a contributor runs locally, so a green check here means the site builds with
+# the pinned Hugo and every internal link resolves.
+#
+# Third-party actions are pinned to a commit SHA, never to a tag: a tag can be
+# moved to point at different code after review.
+
+# Every pull request, whatever it targets. A change that is stacked on another
+# branch gets the same scrutiny as one aimed straight at main.
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and check links
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site and its theme
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          # Congo is a pinned submodule; without this the build fails on a
+          # missing theme.
+          submodules: recursive
+
+      - name: Set up Hugo
+        uses: ./.github/actions/setup-hugo
+
+      - name: Build
+        # --panicOnWarning is what makes the build a gate rather than a report:
+        # it turns the hugoVersion constraint and the frontmatter partial's
+        # complaints into a failure. Same command as AGENTS.md documents.
+        run: hugo --minify --gc --panicOnWarning
+
+      - name: Check internal links
+        # lycheeverse/lychee-action v2.9.0
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8
+        with:
+          # --offline resolves local targets only and makes zero network
+          # requests, which is also what the site's no-external-requests rule
+          # means in practice: an external link here would simply be skipped,
+          # never silently fetched.
+          #
+          # --root-dir is not optional. Congo emits root-relative links (the
+          # favicons, the home link); without it lychee resolves them against
+          # the filesystem root and reports every page as broken.
+          args: >-
+            --offline --no-progress
+            --root-dir ${{ github.workspace }}/public
+            'public/**/*.html'
+          fail: true
