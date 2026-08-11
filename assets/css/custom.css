@@ -21,3 +21,31 @@ a[rel~="me"] {
 .dark a[rel~="me"] {
   color: rgb(var(--color-neutral-400));
 }
+
+/*
+  The arrow marking a link that leaves the site, same problem and same fix.
+  It is the only signal that a project card sends the reader to GitHub, and at
+  the theme's shade it is close to invisible on the white page.
+
+  Matched through the link's own rel, so it survives a restyle of the span.
+*/
+a[rel~="external"] + span[title] {
+  color: rgb(var(--color-neutral-500));
+
+  /*
+    The arrow is U+2197 with no variation selector, and the theme's font stack
+    ends in the system emoji fonts - so it arrives as a blue emoji badge on
+    every project card. Colour alone cannot tone it down, because emoji glyphs
+    ignore it.
+
+    Dropping the emoji fonts for this one span, and asking for the text
+    presentation where the browser understands it, gets the quiet typographic
+    arrow the theme clearly meant.
+  */
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-variant-emoji: text;
+}
+
+.dark a[rel~="external"] + span[title] {
+  color: rgb(var(--color-neutral-400));
+}
