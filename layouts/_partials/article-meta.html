@@ -1,0 +1,91 @@
+{{/*
+  Overrides themes/congo/layouts/_partials/article-meta.html.
+
+  Kept as a faithful copy of the theme's version, so a theme upgrade can be
+  diffed against the original and reapplied, with two deliberate differences:
+
+  1. The update date no longer waits for the creation date to differ. The lab's
+     reference pages promise to be current, and "current as of" is worth stating
+     even on a page that has not needed correcting yet. Upstream hides it in
+     that case, which would leave the lab list with dates on some rows and not
+     others.
+
+  2. The taxonomy block is reached on list pages. Upstream guards it with a
+     scope check that never passes for a list item, so tags rendered on a
+     project's own page and vanished from the listing that links to it -
+     measured, not assumed. Scope still decides which param is consulted.
+
+  Everything else - which meta items exist, the separator, the draft badge, the
+  markup and its classes - is the theme's.
+*/}}
+
+{{/* Determine the correct context and scope */}}
+{{/* This allows for different logic depending on where the partial is called */}}
+{{ $context := . }}
+{{ $scope := default nil }}
+
+{{ if (reflect.IsMap . ) }}
+  {{ $context = .context }}
+  {{ $scope = cond (not .scope) nil .scope }}
+{{ end }}
+
+{{ with $context }}
+  {{ $meta := newScratch }}
+
+  {{/* Gather partials for this context */}}
+  {{ if .Params.showDate | default (.Site.Params.article.showDate | default true) }}
+    {{ $meta.Add "partials" (slice (partial "meta/date.html" .Date)) }}
+  {{ end }}
+
+  {{/* Difference 1: no `ne .Date .Lastmod` guard - see the header. */}}
+  {{ if .Params.showDateUpdated | default (.Site.Params.article.showDateUpdated | default false) }}
+    {{ $meta.Add "partials" (slice (partial "meta/date-updated.html" .Lastmod)) }}
+  {{ end }}
+
+  {{ if and (.Params.showWordCount | default (.Site.Params.article.showWordCount | default false)) (ne .WordCount 0) }}
+    {{ $meta.Add "partials" (slice (partial "meta/word-count.html" .)) }}
+  {{ end }}
+
+  {{ if and (.Params.showReadingTime | default (.Site.Params.article.showReadingTime | default true)) (ne .ReadingTime 0) }}
+    {{ $meta.Add "partials" (slice (partial "meta/reading-time.html" .)) }}
+  {{ end }}
+
+  {{ if and (eq $scope "single") (.Params.showEdit | default (.Site.Params.article.showEdit | default false)) }}
+    {{ $meta.Add "partials" (slice (partial "meta/edit.html" .)) }}
+  {{ end }}
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    {{/* Output partials */}}
+    {{ with ($meta.Get "partials") }}
+      {{ delimit . "<span class=\"px-2 text-primary-500\">&middot;</span>" | safeHTML }}
+    {{ end }}
+
+    {{/* Output draft label */}}
+    {{ if and (eq $scope "single") (and .Draft .Site.Params.article.showDraftLabel) }}
+      <span class="ps-2">{{ partial "badge.html" (i18n "article.draft" | emojify) }}</span>
+    {{ end }}
+  </div>
+
+  {{/* Output taxonomies */}}
+  {{/* Difference 2: one flat condition, choosing the fallback by scope. */}}
+  {{ $showTaxonomies := cond (eq $scope "single")
+    (.Params.showTaxonomies | default (.Site.Params.article.showTaxonomies | default false))
+    (.Params.showTaxonomies | default (.Site.Params.list.showTaxonomies | default (.Site.Params.article.showTaxonomies | default false)))
+  }}
+  {{ if $showTaxonomies }}
+    <div class="my-1 flex flex-wrap text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+      {{ range $taxonomy, $terms := .Site.Taxonomies }}
+        {{ if (gt (len ($context.GetTerms $taxonomy)) 0) }}
+          {{ range $context.GetTerms $taxonomy }}
+            <a
+              href="{{ .Permalink }}"
+              class="mx-1 my-1 rounded-md border border-neutral-200 px-1 py-[1px] hover:border-primary-300 hover:text-primary-700 dark:border-neutral-600 dark:hover:border-primary-600 dark:hover:text-primary-400"
+              >{{ .LinkTitle }}</a
+            >
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ end }}
+{{ end }}
