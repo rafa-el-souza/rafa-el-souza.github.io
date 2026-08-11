@@ -1,0 +1,67 @@
+name: Deploy to Pages
+
+# Merging to main publishes. This is the only automated publishing path for the
+# site, and it deliberately runs the same build as the PR check.
+#
+# Requires the repository's Pages source to be set to "GitHub Actions"
+# (Settings > Pages > Build and deployment > Source).
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time, and never cancel one midway: a cancelled deployment can
+# leave the site serving a half-published state.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site and its theme
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          submodules: recursive
+
+      - name: Set up Hugo
+        uses: ./.github/actions/setup-hugo
+
+      - name: Configure Pages
+        # actions/configure-pages v6.0.0
+        # Its base_url output is deliberately unused: baseURL is committed in
+        # config/_default/hugo.toml, so the deployed site is byte-identical to
+        # what a local build produces. This step is here to set up the Pages
+        # deployment itself.
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+
+      - name: Build
+        run: hugo --minify --gc --panicOnWarning
+
+      - name: Upload artifact
+        # actions/upload-pages-artifact v5.0.0
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: ./public
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        # actions/deploy-pages v5.0.0
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128

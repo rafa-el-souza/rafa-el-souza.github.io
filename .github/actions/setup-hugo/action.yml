@@ -1,0 +1,40 @@
+name: Set up Hugo
+description: >
+  Install the pinned Hugo extended build and verify it against the checksum
+  published with that release before it is allowed to run.
+
+# Single source of truth for the Hugo version used by every workflow. It must
+# stay at or above the `min` in config/_default/module.toml, which Hugo itself
+# enforces at build time. Extended is mandatory: Congo compiles SCSS.
+#
+# The checksum comes from hugo_<version>_checksums.txt on the release. When
+# bumping the version, take the new value from that file - never from anywhere
+# else - and update both inputs together.
+inputs:
+  version:
+    description: Hugo version to install, without the leading v.
+    required: false
+    default: "0.164.0"
+  sha256:
+    description: SHA-256 of hugo_extended_<version>_linux-amd64.deb.
+    required: false
+    default: "8325f3653032d0fc536503691f4833dc4eb6c6be02ee62466758f3f37a7f2fcd"
+
+runs:
+  using: composite
+  steps:
+    - name: Download, verify and install Hugo
+      shell: bash
+      env:
+        HUGO_VERSION: ${{ inputs.version }}
+        HUGO_SHA256: ${{ inputs.sha256 }}
+      run: |
+        set -euo pipefail
+        deb="hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+        curl --fail --silent --show-error --location \
+          --output "${deb}" \
+          "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/${deb}"
+        printf '%s  %s\n' "${HUGO_SHA256}" "${deb}" | sha256sum --check --strict -
+        sudo dpkg --install "${deb}"
+        rm -f "${deb}"
+        hugo version

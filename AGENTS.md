@@ -66,6 +66,25 @@ own extension point, so the theme stays untouched. Note the leading underscore:
 Congo 2.14 uses Hugo's current template layout, where partials live in
 `layouts/_partials/`, not `layouts/partials/`.
 
+### Checks
+
+`.github/workflows/pr.yml` runs on every pull request, whatever it targets: the
+build command above, then `lychee --offline` over the generated `public/`, which
+resolves internal links without making a single network request. Congo emits
+root-relative links, so lychee needs `--root-dir` pointing at `public/` or it
+reports every page as broken.
+
+`.github/workflows/pages.yml` builds and deploys to GitHub Pages on push to
+`main`. Merging is what publishes; there is no other automated path.
+
+Both install Hugo through `.github/actions/setup-hugo`, which downloads the
+pinned release and verifies it against its published SHA-256 before installing.
+That composite action is the single place the Hugo version and its checksum are
+declared - change them there, together, taking the checksum from the release's
+own `hugo_<version>_checksums.txt`. Third-party actions are pinned to commit
+SHAs rather than tags, since a tag can be repointed after review; the comment
+above each one records the version that SHA corresponds to.
+
 ### Customising Congo
 
 Never edit `themes/congo/`. It is a pinned submodule, so edits there are untracked by
