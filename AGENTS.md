@@ -66,6 +66,31 @@ own extension point, so the theme stays untouched. Note the leading underscore:
 Congo 2.14 uses Hugo's current template layout, where partials live in
 `layouts/_partials/`, not `layouts/partials/`.
 
+### Two languages, one tree shape
+
+English (`en`, default) and Portuguese (`pt`) are separate content trees, wired
+by `contentDir` in `config/_default/languages.<lang>.toml`. Without that setting
+Hugo reads `content/` as a single tree and silently turns `en/` and `pt/` into
+sections of the default language - the build still succeeds, so check the
+per-language page counts rather than the exit code.
+
+**Paths are identical in both languages**; only labels are translated. A page
+lives at `/en/lab/egress/` and `/pt/lab/egress/`, and the Portuguese title is
+what differs. Translating URL segments is a later decision, not an oversight.
+
+Every content file needs a **`translationKey`** in its frontmatter. That is what
+pairs a page with its counterpart, and without it the language switcher lands on
+the home page and `hreflang` has nothing to point at. Both files in a pair carry
+the same key.
+
+`locale` in the language config is what reaches `<html lang>`; the language key
+(the file name, `languages.pt.toml`) is what reaches URLs and `hreflang`. They
+are deliberately different for Portuguese: `pt` in the URL, `pt-BR` in the tag.
+
+Portuguese theme strings come from `i18n/pt.yaml` in this repository. Congo
+ships `pt-BR` and `pt-PT` but no plain `pt`, and Hugo looks translations up by
+the language key, so the file has to live here.
+
 ### Checks
 
 `.github/workflows/pr.yml` runs on every pull request, whatever it targets: the

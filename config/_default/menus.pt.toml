@@ -1,0 +1,30 @@
+# Navegação principal, português.
+# Os caminhos são os mesmos do inglês de propósito: só os rótulos mudam, o que
+# mantém as duas árvores um espelho exato e o hreflang trivial de casar.
+# Manter em sincronia com menus.en.toml - mesmas entradas, mesmos pesos.
+
+[[main]]
+  name = "Lab"
+  pageRef = "lab"
+  weight = 10
+
+[[main]]
+  name = "Projetos"
+  pageRef = "projects"
+  weight = 20
+
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 30
+
+[[main]]
+  name = "Sobre"
+  pageRef = "about"
+  weight = 40
+
+[[main]]
+  identifier = "locale"
+  weight = 100
+  [main.params]
+    action = "locale"

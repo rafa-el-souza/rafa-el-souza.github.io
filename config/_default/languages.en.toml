@@ -1,0 +1,26 @@
+# English - the default language.
+# `locale` is what reaches <html lang>, so it carries the region; the file name
+# carries the language key, which is what appears in URLs and in hreflang.
+locale = "en"
+label = "English"
+direction = "ltr"
+weight = 1
+
+# Without contentDir Hugo reads content/ as one tree and turns en/ and pt/ into
+# plain sections of this language instead of two languages.
+contentDir = "content/en"
+
+title = "Rafael Souza"
+
+[params]
+  dateFormat = "2 January 2006"
+  mainSections = ["posts"]
+  description = "An investigation in public into what it means to run AI agents safely."
+
+[params.author]
+  name = "Rafael Souza"
+  headline = "What does it mean to run AI agents safely?"
+  links = [
+    { github = "https://github.com/rafa-el-souza" },
+    { linkedin = "https://www.linkedin.com/in/rafa-el-souza" },
+  ]
