@@ -52,6 +52,20 @@ Preview locally with live reload, served on <http://localhost:1313>:
 hugo server
 ```
 
+### Content requirements
+
+Every page with a file under `content/` must declare `title`, `date` and
+`summary` in its frontmatter. This is enforced, not advisory:
+`layouts/_partials/validate-frontmatter.html` calls `errorf` on a page that is
+missing any of them, which fails the build and names the file and the fields.
+Pages Hugo generates on its own - section lists with no `_index.md`, taxonomy
+and term pages - have no frontmatter and are not checked.
+
+The partial is wired in through `layouts/_partials/extend-head.html`, Congo's
+own extension point, so the theme stays untouched. Note the leading underscore:
+Congo 2.14 uses Hugo's current template layout, where partials live in
+`layouts/_partials/`, not `layouts/partials/`.
+
 ### Customising Congo
 
 Never edit `themes/congo/`. It is a pinned submodule, so edits there are untracked by

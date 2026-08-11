@@ -1,0 +1,6 @@
+{{- /*
+  Congo's sanctioned extension point inside <head>, rendered once per page.
+  Overriding the theme's own templates is not allowed here, so this is where the
+  frontmatter gate hooks in. It emits no markup.
+*/ -}}
+{{- partial "validate-frontmatter.html" . -}}

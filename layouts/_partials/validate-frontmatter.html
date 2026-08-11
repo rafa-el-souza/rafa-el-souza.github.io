@@ -1,0 +1,30 @@
+{{- /*
+  Build-time frontmatter gate.
+
+  Every page backed by a file under content/ must declare title, date and
+  summary. A page missing any of them aborts the build with errorf, so it cannot
+  reach the published site through any route: not a local build, and not the one
+  GitHub Actions runs on a pull request.
+
+  Scope is deliberately `.File`: pages Hugo generates by itself - section lists
+  with no _index.md, taxonomy and term pages - have no frontmatter to validate.
+
+  Checks read the raw params rather than the rendered values, because Hugo fills
+  several of these in. `.Summary` is derived from the body when frontmatter
+  omits it, so only `.Params.summary` can tell the two apart.
+*/ -}}
+{{- if .File -}}
+  {{- $missing := slice -}}
+  {{- if not .Params.title -}}
+    {{- $missing = $missing | append "title" -}}
+  {{- end -}}
+  {{- if .Date.IsZero -}}
+    {{- $missing = $missing | append "date" -}}
+  {{- end -}}
+  {{- if not .Params.summary -}}
+    {{- $missing = $missing | append "summary" -}}
+  {{- end -}}
+  {{- with $missing -}}
+    {{- errorf "%s: missing required frontmatter: %s" $.File.Path (delimit . ", ") -}}
+  {{- end -}}
+{{- end -}}
