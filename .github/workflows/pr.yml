@@ -41,6 +41,13 @@ jobs:
         # complaints into a failure. Same command as AGENTS.md documents.
         run: hugo --minify --gc --panicOnWarning
 
+      - name: Audit for external assets
+        # The site must load nothing from another host: no fonts, no scripts, no
+        # stylesheets, no images. Linking out is fine - a link is a request the
+        # reader chooses to make - so this parses the HTML rather than grepping
+        # it, and judges by tag instead of by URL.
+        run: python3 .github/scripts/audit-external-assets.py public
+
       - name: Check internal links
         # lycheeverse/lychee-action v2.9.0
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8
