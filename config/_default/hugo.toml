@@ -15,6 +15,16 @@ removePathAccents = true
 # Hugo emits no robots.txt unless asked; the theme supplies the layout.
 enableRobotsTXT = true
 
+# Take each page's last-modified date from the last commit that touched it,
+# rather than from a frontmatter field somebody has to remember to bump or from
+# a file timestamp, which a fresh checkout resets to the moment it was cloned.
+# The lab pages are the ones that need it: a living document is only worth
+# trusting if the reader can see when it was last corrected.
+#
+# This makes the build read git history, so both workflows check out with
+# fetch-depth: 0. A shallow clone would date every page to the same commit.
+enableGitInfo = true
+
 # The JSON output is the search index. Congo's search reads it at runtime and
 # runs entirely in the browser, so nothing here reaches a third party.
 [outputs]

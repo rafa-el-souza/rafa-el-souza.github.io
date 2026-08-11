@@ -87,9 +87,14 @@ the same key.
 (the file name, `languages.pt.toml`) is what reaches URLs and `hreflang`. They
 are deliberately different for Portuguese: `pt` in the URL, `pt-BR` in the tag.
 
-Portuguese theme strings come from `i18n/pt.yaml` in this repository. Congo
-ships `pt-BR` and `pt-PT` but no plain `pt`, and Hugo looks translations up by
-the language key, so the file has to live here.
+Portuguese theme strings come from **`i18n/pt-BR.yaml`** in this repository, and
+the file name is the `locale`, not the language key. Hugo resolves translations
+by locale, so a file named `pt.yaml` is silently ignored here and every string
+falls through to the theme's own `pt-BR.yaml` - which looks like it works,
+because that file is mostly complete, right up until a string it leaves
+commented out renders in English on a Portuguese page.
+
+If a Portuguese page shows an English label, that is the first thing to check.
 
 ### Search
 

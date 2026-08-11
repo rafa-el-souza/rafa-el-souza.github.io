@@ -1,7 +1,9 @@
 # Portuguese - a full mirror of the English tree, same paths under /pt/.
 # The key is `pt` so URLs and hreflang read as plain Portuguese, while `locale`
-# carries the region that reaches <html lang>. Theme strings for this key come
-# from our own i18n/pt.yaml, since Congo ships pt-BR and pt-PT but no plain pt.
+# carries the region that reaches <html lang>. It also decides which i18n file
+# applies: Hugo resolves translations by locale, so the strings live in
+# i18n/pt-BR.yaml - naming that file after the language key would leave it
+# silently unused.
 locale = "pt-BR"
 label = "Português"
 direction = "ltr"

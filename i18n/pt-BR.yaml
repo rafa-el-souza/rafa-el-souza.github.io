@@ -1,0 +1,71 @@
+# Portuguese theme strings.
+#
+# Congo ships pt-BR.yaml and pt-PT.yaml but no plain pt.yaml, and Hugo looks up
+# translations by the language key. This site uses the key `pt`, so the strings
+# have to live here. Started as a copy of themes/congo/i18n/pt-BR.yaml
+# (Congo, MIT); when the theme adds strings, missing keys here fall back to the
+# default language.
+#
+# The upstream file left several strings commented out or in English, which is
+# how a "Portuguese" page ends up with an English search box. Everything this
+# site actually renders is filled in below. Anything still commented is for a
+# feature that is switched off here; uncomment it when the feature is switched
+# on, rather than leaving the reader to find it in English.
+
+article:
+  anchor_label: "Âncora"
+  date: "{{ .Date }}"
+  date_updated: "Atualizado: {{ .Date }}"
+  draft: "Rascunho"
+  edit_title: "Editar conteúdo"
+  reading_time:
+    one: "{{ .Count }} minuto"
+    other: "{{ .Count }} minutos"
+  reading_time_title: "Tempo de leitura"
+  table_of_contents: "Índice"
+  word_count:
+    one: "{{ .Count }} palavra"
+    other: "{{ .Count }} palavras"
+
+author:
+  byline_title: "Autor"
+
+code:
+  copy: "Copiar"
+  copied: "Copiado"
+
+error:
+  404_title: "Página não encontrada :confused:"
+  404_error: "Erro 404"
+  404_description: "Aparentemente a página requisitada não existe."
+
+footer:
+  dark_appearance: "Mudar para o modo escuro"
+  light_appearance: "Mudar para o modo claro"
+  powered_by: "Movido por {{ .Hugo }} &amp; {{ .Congo }}"
+
+list:
+  externalurl_title: "Link para site externo"
+  no_articles: "Ainda não há nada aqui."
+
+nav:
+  scroll_to_top_title: "Voltar ao topo"
+  skip_to_main: "Pular para o conteúdo principal"
+
+search:
+  open_button_title: "Buscar (/)"
+  close_button_title: "Fechar (Esc)"
+  input_placeholder: "Buscar"
+
+sharing:
+  email: "Enviar por email"
+  facebook: "Compartilhar pelo Facebook"
+  linkedin: "Compartilhar pelo LinkedIn"
+  pinterest: "Salvar no Pinterest"
+  reddit: "Postar no Reddit"
+  telegram: "Compartilhar pelo Telegram"
+  line: "Compartilhar pelo LINE"
+  weibo: "Compartilhar pelo Weibo"
+
+shortcode:
+  recent_articles: "Recentes"
