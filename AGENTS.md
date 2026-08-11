@@ -101,6 +101,20 @@ search box reaches no third party.
 It is an overlay opened from the menu entry with `action = "search"`, not a
 page, so there is no `search.md` to write.
 
+### Share previews and the 404
+
+The theme emits every Open Graph and Twitter tag except the image, so
+`layouts/_partials/extend-head.html` adds `og:image` and `twitter:image`,
+picking `static/og-default-<lang>.png` by language. Both images are
+placeholders. There is deliberately no `twitter:site` or `twitter:creator`:
+those name an account, and there is none.
+
+`static/404.html` is a standalone bilingual page, not a copy of the themed one.
+Hugo generates a 404 inside each language, but GitHub Pages only ever serves
+`/404.html`, and nothing generates that while the languages live in
+subdirectories. At the root no language has been chosen, so offering both is
+the honest answer - and a page that depends on no theme cannot drift from one.
+
 ### Checks
 
 `.github/workflows/pr.yml` runs on every pull request, whatever it targets: the

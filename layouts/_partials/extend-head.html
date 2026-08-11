@@ -1,6 +1,31 @@
 {{- /*
   Congo's sanctioned extension point inside <head>, rendered once per page.
-  Overriding the theme's own templates is not allowed here, so this is where the
-  frontmatter gate hooks in. It emits no markup.
+  Overriding the theme's own templates is not allowed here, so this is where
+  additions to the head go.
 */ -}}
+
+{{- /* The frontmatter gate. Emits no markup; it either passes or fails the
+       build. */ -}}
 {{- partial "validate-frontmatter.html" . -}}
+
+{{- /*
+  Share image. The theme emits every other Open Graph and Twitter tag but no
+  image, and a link with no image previews as a bare grey box.
+
+  One image per language, served from this site like everything else. Both are
+  placeholders until the creative pass produces real ones; the generator lives
+  outside this repository because it is not part of the build.
+
+  The twitter:* tags are a compatibility layer only. X falls back to Open Graph
+  when they are absent, and every other place a link gets shared - LinkedIn,
+  Slack, WhatsApp - reads Open Graph alone. There is deliberately no
+  twitter:site or twitter:creator: those name an account, and there is none.
+*/ -}}
+{{- $ogImage := printf "og-default-%s.png" .Lang | absURL -}}
+{{- $ogAlt := printf "%s - %s" site.Title (site.Language.Params.Author.headline | default site.Params.description) -}}
+<meta property="og:image" content="{{ $ogImage }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="{{ $ogAlt }}" />
+<meta name="twitter:image" content="{{ $ogImage }}" />
+<meta name="twitter:image:alt" content="{{ $ogAlt }}" />
