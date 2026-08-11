@@ -1,0 +1,26 @@
+# Settings shared by both languages. Anything that differs per language lives in
+# languages.<lang>.toml instead.
+
+# Congo's own scheme, deliberately a throwaway: the palette is chosen in the
+# creative pass, not here.
+colorScheme = "congo"
+
+[homepage]
+  # The built-in profile layout: name, headline, links, then the page body.
+  layout = "profile"
+  showRecent = false
+
+[article]
+  showDate = true
+  showAuthor = false
+  showBreadcrumbs = true
+  showReadingTime = false
+  showTaxonomies = true
+  showWordCount = false
+
+[list]
+  showSummary = true
+  showTableOfContents = false
+
+[footer]
+  showScrollToTop = true

@@ -1,7 +1,13 @@
 baseURL = 'https://rafa-el-souza.github.io/'
-locale = 'en-us'
-title = 'Rafael Souza'
 theme = 'congo'
 
-[params]
-  colorScheme = 'congo'
+# English is the default language and still lives under its own path, so both
+# languages are addressed the same way: /en/... and /pt/.... Hugo puts a
+# redirect at the root. Per-language title, locale and author details live in
+# config/_default/languages.<lang>.toml; shared settings in params.toml.
+defaultContentLanguage = 'en'
+defaultContentLanguageInSubdir = true
+
+# Portuguese titles and tags carry accents; without this they reach the URL and
+# get percent-encoded, which is unreadable the moment a link is shared.
+removePathAccents = true

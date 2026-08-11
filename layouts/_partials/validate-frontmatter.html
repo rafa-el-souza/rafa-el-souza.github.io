@@ -25,6 +25,8 @@
     {{- $missing = $missing | append "summary" -}}
   {{- end -}}
   {{- with $missing -}}
-    {{- errorf "%s: missing required frontmatter: %s" $.File.Path (delimit . ", ") -}}
+    {{- /* The language prefix matters: .File.Path is relative to the language's
+           contentDir, so en and pt pages report the same path without it. */ -}}
+    {{- errorf "content/%s/%s: missing required frontmatter: %s" $.Lang $.File.Path (delimit . ", ") -}}
   {{- end -}}
 {{- end -}}

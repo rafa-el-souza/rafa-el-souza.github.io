@@ -1,0 +1,31 @@
+# Main navigation, English.
+# Order is set by weight, not alphabetically. Lab comes first because the living
+# docs are the spine of the site; the rest follows.
+# Keep this in step with menus.pt.toml - same entries, same weights.
+
+[[main]]
+  name = "Lab"
+  pageRef = "lab"
+  weight = 10
+
+[[main]]
+  name = "Projects"
+  pageRef = "projects"
+  weight = 20
+
+[[main]]
+  name = "Posts"
+  pageRef = "posts"
+  weight = 30
+
+[[main]]
+  name = "About"
+  pageRef = "about"
+  weight = 40
+
+# The language switcher. Congo renders it from this entry alone.
+[[main]]
+  identifier = "locale"
+  weight = 100
+  [main.params]
+    action = "locale"
