@@ -117,11 +117,21 @@ the honest answer - and a page that depends on no theme cannot drift from one.
 
 ### Checks
 
-`.github/workflows/pr.yml` runs on every pull request, whatever it targets: the
-build command above, then `lychee --offline` over the generated `public/`, which
-resolves internal links without making a single network request. Congo emits
-root-relative links, so lychee needs `--root-dir` pointing at `public/` or it
-reports every page as broken.
+`.github/workflows/pr.yml` runs on every pull request, whatever it targets:
+
+1. the build command above;
+2. `.github/scripts/audit-external-assets.py`, which fails if the built site
+   would load anything from another host;
+3. `lychee --offline` over the generated `public/`, which resolves internal
+   links without making a single network request. Congo emits root-relative
+   links, so lychee needs `--root-dir` pointing at `public/` or it reports every
+   page as broken.
+
+The audit parses the HTML rather than grepping it, because the distinction that
+matters is by tag, not by URL: `<a href>` to another site is content and passes,
+`<script src>` or a webfont is a request the reader never agreed to and fails.
+Run it locally the same way: `python3 .github/scripts/audit-external-assets.py
+public`.
 
 `.github/workflows/pages.yml` builds and deploys to GitHub Pages, and currently
 runs **only when started by hand**. The site is not published while its content
@@ -143,7 +153,9 @@ Never edit `themes/congo/`. It is a pinned submodule, so edits there are untrack
 this repository and lost on the next theme update. Customise from this repository
 instead:
 
-- `assets/css/custom.css` - extra CSS, loaded by the theme after its own stylesheet.
+- `assets/css/custom.css` - extra CSS, loaded by the theme after its own
+  stylesheet. It currently holds one rule: the author icons fail WCAG contrast
+  at the theme's own shade, and the partial that paints them is the theme's.
 - `assets/css/schemes/<name>.css` - a colour scheme, selected by `params.colorScheme`
   in `config/_default/hugo.toml`.
 - `layouts/` - own partials and templates, which override the theme's file for file.

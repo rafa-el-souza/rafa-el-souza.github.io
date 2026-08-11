@@ -1,0 +1,23 @@
+/*
+  Overrides loaded after the theme's own stylesheet. Kept as small as it can be:
+  the palette and any real styling belong to the design pass, not here.
+
+  Author links (the GitHub and LinkedIn icons under the name).
+  The theme paints them neutral-400, which on the white page measures 2.56:1.
+  WCAG 1.4.11 asks for 3:1 on non-text elements that carry meaning, and these
+  are the only way to reach either profile, so they carry plenty.
+
+  Moving each one shade in the direction of more contrast takes light mode to
+  4.83:1 and dark mode from a marginal 3.08:1 to 5.81:1, and matches the muted
+  tone the theme already uses for the headline right above them.
+
+  Targeted by rel="me" rather than by the theme's utility classes: the relation
+  is what these links mean, so it stays true if the theme restyles them.
+*/
+a[rel~="me"] {
+  color: rgb(var(--color-neutral-500));
+}
+
+.dark a[rel~="me"] {
+  color: rgb(var(--color-neutral-400));
+}
