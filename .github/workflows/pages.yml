@@ -41,6 +41,9 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           submodules: recursive
+          # enableGitInfo dates each page from the last commit that touched it;
+          # a shallow clone would date them all to the same one.
+          fetch-depth: 0
 
       - name: Set up Hugo
         uses: ./.github/actions/setup-hugo

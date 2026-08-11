@@ -5,6 +5,9 @@ summary = "Páginas de referência vivas, uma por faceta de rodar agentes com se
 translationKey = "lab"
 
 groupByYear = false
+
+[cascade]
+  showDateUpdated = true
 +++
 
 A investigação, organizada por faceta em vez de por ferramenta. As ferramentas
