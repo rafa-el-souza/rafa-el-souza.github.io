@@ -24,6 +24,12 @@
   weight = 40
 
 [[main]]
+  identifier = "search"
+  weight = 90
+  [main.params]
+    action = "search"
+
+[[main]]
   identifier = "locale"
   weight = 100
   [main.params]

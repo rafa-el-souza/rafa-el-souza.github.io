@@ -11,3 +11,11 @@ defaultContentLanguageInSubdir = true
 # Portuguese titles and tags carry accents; without this they reach the URL and
 # get percent-encoded, which is unreadable the moment a link is shared.
 removePathAccents = true
+
+# Hugo emits no robots.txt unless asked; the theme supplies the layout.
+enableRobotsTXT = true
+
+# The JSON output is the search index. Congo's search reads it at runtime and
+# runs entirely in the browser, so nothing here reaches a third party.
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

@@ -23,7 +23,14 @@
   pageRef = "about"
   weight = 40
 
-# The language switcher. Congo renders it from this entry alone.
+# Search and the language switcher. Congo renders both from these entries alone;
+# search is an overlay, so it needs no page of its own.
+[[main]]
+  identifier = "search"
+  weight = 90
+  [main.params]
+    action = "search"
+
 [[main]]
   identifier = "locale"
   weight = 100
