@@ -15,7 +15,11 @@ enableSearch = true
   showRecent = false
 
 [article]
-  showDate = true
+  # Posts are the only dated content here. A date on About, on a project card or
+  # on a living reference page is the day the file happened to be written, which
+  # says nothing true about the thing itself and ages badly. The posts section
+  # turns it back on for its own pages.
+  showDate = false
   showAuthor = false
   showBreadcrumbs = true
   showReadingTime = false

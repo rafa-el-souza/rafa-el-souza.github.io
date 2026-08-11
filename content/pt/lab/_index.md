@@ -3,6 +3,8 @@ title = "Lab"
 date = 2026-08-11
 summary = "Páginas de referência vivas, uma por faceta de rodar agentes com segurança, mantidas em dia conforme a evidência muda."
 translationKey = "lab"
+
+groupByYear = false
 +++
 
 A investigação, organizada por faceta em vez de por ferramenta. As ferramentas
