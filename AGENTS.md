@@ -91,6 +91,16 @@ Portuguese theme strings come from `i18n/pt.yaml` in this repository. Congo
 ships `pt-BR` and `pt-PT` but no plain `pt`, and Hugo looks translations up by
 the language key, so the file has to live here.
 
+### Search
+
+Client-side, over a JSON index Hugo emits for each language's home page
+(`[outputs] home` in `hugo.toml`, `enableSearch` in `params.toml`). Fuse.js
+ships inside the theme and is bundled into the site's own JavaScript, so the
+search box reaches no third party.
+
+It is an overlay opened from the menu entry with `action = "search"`, not a
+page, so there is no `search.md` to write.
+
 ### Checks
 
 `.github/workflows/pr.yml` runs on every pull request, whatever it targets: the

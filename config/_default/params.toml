@@ -5,6 +5,10 @@
 # creative pass, not here.
 colorScheme = "congo"
 
+# Client-side search over the JSON index declared in hugo.toml. Fuse.js ships
+# with the theme, so no script is fetched from anywhere else.
+enableSearch = true
+
 [homepage]
   # The built-in profile layout: name, headline, links, then the page body.
   layout = "profile"
