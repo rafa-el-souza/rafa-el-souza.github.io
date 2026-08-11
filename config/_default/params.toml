@@ -29,6 +29,10 @@ enableSearch = true
 [list]
   showSummary = true
   showTableOfContents = false
+  # Tags take the line the creation date used to occupy, with something true in
+  # it. Pages without tags render nothing, so this only shows up where there is
+  # something to show.
+  showTaxonomies = true
 
 [footer]
   showScrollToTop = true
