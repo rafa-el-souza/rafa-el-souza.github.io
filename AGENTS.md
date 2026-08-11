@@ -99,8 +99,11 @@ resolves internal links without making a single network request. Congo emits
 root-relative links, so lychee needs `--root-dir` pointing at `public/` or it
 reports every page as broken.
 
-`.github/workflows/pages.yml` builds and deploys to GitHub Pages on push to
-`main`. Merging is what publishes; there is no other automated path.
+`.github/workflows/pages.yml` builds and deploys to GitHub Pages, and currently
+runs **only when started by hand**. The site is not published while its content
+is placeholder, so merging to `main` changes nothing a visitor can see. The
+workflow's own comment carries the two steps that turn publishing back on; both
+are needed, neither is enough alone.
 
 Both install Hugo through `.github/actions/setup-hugo`, which downloads the
 pinned release and verifies it against its published SHA-256 before installing.

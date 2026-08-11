@@ -1,14 +1,23 @@
 name: Deploy to Pages
 
-# Merging to main publishes. This is the only automated publishing path for the
-# site, and it deliberately runs the same build as the PR check.
+# Deployment is deliberately manual for now.
 #
-# Requires the repository's Pages source to be set to "GitHub Actions"
-# (Settings > Pages > Build and deployment > Source).
+# The site holds placeholder content while the real writing is done, so nothing
+# should reach the public URL by merging. This workflow therefore runs only when
+# started by hand, and merging to main changes nothing that a visitor can see.
+#
+# To publish again: add the push trigger back
+#
+#   on:
+#     push:
+#       branches: [main]
+#     workflow_dispatch:
+#
+# and set the repository's Pages source to "GitHub Actions" (Settings > Pages >
+# Build and deployment > Source). Both are required - the trigger alone does
+# nothing if Pages is unpublished, and vice versa.
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
