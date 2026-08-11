@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+  Root 404.
+
+  Hugo generates a themed 404 inside each language (/en/404.html, /pt/404.html),
+  but GitHub Pages only ever serves /404.html, and nothing generates that when
+  the languages live in subdirectories. This file fills that gap.
+
+  It is deliberately standalone rather than a copy of the themed page: at the
+  root no language has been chosen yet, so the honest response is to say so in
+  both and let the visitor pick. Being self-contained also means it cannot drift
+  out of step with a theme it never depended on.
+
+  No external requests, no scripts, system fonts, and it follows the reader's
+  light or dark preference.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Not found - Rafael Souza</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #1f2328;
+        --muted: #59636e;
+        --accent: #0969da;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --fg: #e6edf3;
+          --muted: #9198a1;
+          --accent: #6cb0ff;
+        }
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.5;
+      }
+      main {
+        max-width: 32rem;
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem;
+      }
+      p {
+        color: var(--muted);
+        margin: 0 0 2rem;
+      }
+      .lang + .lang {
+        margin-top: 1.5rem;
+      }
+      a {
+        color: var(--accent);
+        font-weight: 600;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="lang" lang="en">
+        <h1>This page does not exist</h1>
+        <p>The link may be old, or the address may have a typo.</p>
+        <a href="/en/">Go to the site in English</a>
+      </div>
+      <div class="lang" lang="pt-BR">
+        <h1>Esta página não existe</h1>
+        <p>O link pode estar velho, ou o endereço pode ter um erro de digitação.</p>
+        <a href="/pt/">Ir para o site em português</a>
+      </div>
+    </main>
+  </body>
+</html>
