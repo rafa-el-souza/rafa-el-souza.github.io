@@ -1,0 +1,21 @@
+# Session artefacts, not product documentation
+IMPLEMENTATION-BRIEF.md
+
+# Owner's private files, beside the spec, never tracked
+OWNER-*
+
+# Dependencies, builds and test output
+node_modules/
+dist/
+playwright-report/
+test-results/
+.vitest/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Editors, tools and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
