@@ -1,0 +1,8 @@
+dist
+playwright-report
+test-results
+.vitest
+package-lock.json
+
+# The documents are prose, wrapped and tabled by hand.
+*.md

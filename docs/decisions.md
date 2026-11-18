@@ -125,6 +125,38 @@ names.
 get right is how it looks, how it moves and how fast it answers, and those
 are judged by eye and by measurement.
 
+## 10. The code under MIT; the texts, the CV files and the visual identity, all rights reserved
+
+*2026-11-18.* The code in this repository is under the MIT licence
+(`LICENSE`). The texts of the page, the CV files and the visual identity
+are not licensed for reuse: all rights are reserved. The licence line of
+the last level says both. This answers OD-2 of the design document.
+
+**Why.** The code is the part another developer may want to read and
+reuse. The texts and the CV speak for one person, and the identity is made
+for this site; their reuse is not offered.
+
+## 11. The name shown is Rafa Souza
+
+*2026-11-18.* The page shows the author as Rafa Souza: in its title, its
+heading and its structured data, and at the start of the CV files' names
+(FR-18). This answers OD-3 of the design document.
+
+**Why.** It is the name the domain spells and the commits carry, so a
+reader who arrives from either finds the same name on the page.
+
+## 12. The availability line names remote work, and hybrid work in three cities, with its date
+
+*2026-11-18.* The availability line, on the Opening and on the last level,
+says that he is available for remote work, or for hybrid work in Belo
+Horizonte, São Paulo or Florianópolis, and carries its date. Its wording
+comes with the copy and is approved with its level. This answers OD-4 of
+the design document.
+
+**Why.** The first reader decides in thirty seconds whether a role fits
+(decision 2), and where he can work is part of that answer; a line about
+availability without a date cannot say whether it still holds.
+
 ## Open
 
 Decided by seeing, in the design slice and the motion prototype: the visual
@@ -134,7 +166,5 @@ entrance; a portrait or none; the selectors' form; the favicon and the
 preview image.
 
 Decided in words, not yet: the counting service (recommended: GoatCounter's
-hosted service, with its script served from this site); the licence of
-what is not code (the code is MIT; recommended for the texts, the CV files
-and the visual identity: all rights reserved); the name as shown; the
-availability line; whether the Spanish page gets a CV in Spanish.
+hosted service, with its script served from this site); whether the Spanish
+page gets a CV in Spanish.

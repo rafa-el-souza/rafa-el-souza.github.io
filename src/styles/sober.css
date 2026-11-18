@@ -1,0 +1,52 @@
+/*
+ * The sober page (FR-24): the browser's own colours, in the theme the
+ * browser asks for, its own sans-serif, no motion. One column at a reading
+ * measure. The designed page replaces it whole at launch.
+ */
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+header,
+main {
+  box-sizing: border-box;
+  max-width: 40rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+header {
+  padding-block-start: 1.5rem;
+}
+
+main {
+  padding-block: 3rem 4rem;
+}
+
+h1 {
+  margin-block: 0 0.5rem;
+  font-size: 2.5rem;
+  line-height: 1.15;
+}
+
+ul {
+  margin-block-start: 2rem;
+  padding-inline-start: 1.25rem;
+}
+
+li + li {
+  margin-block-start: 0.5rem;
+}
+
+/* the language the page is in reads as text among the language links */
+a[aria-current="page"] {
+  color: inherit;
+  text-decoration: none;
+}
