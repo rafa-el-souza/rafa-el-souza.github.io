@@ -5,7 +5,7 @@ shown one at a time, in Portuguese, English and Spanish, in a light and a
 dark theme, static on GitHub Pages. This repository holds its source, its
 design and its decisions.
 
-The site will answer at <https://rafasouza.dev.br>.
+The site answers at <https://rafasouza.dev.br>.
 
 ## What it is for
 
@@ -41,9 +41,9 @@ Read, in this order:
 
 ## Status
 
-Design written (2026-11-18). Built: the toolchain, CI and the sober page,
-a plain page in the three languages that the domain serves until launch
-(`docs/design.md`, FR-24). Next, in `docs/design.md` §9: the design, drawn
+Design written (2026-11-18). Built and published: the toolchain, CI and
+the sober page, a plain page in the three languages that the domain serves
+until launch (`docs/design.md`, FR-24). Next, in `docs/design.md` §9: the design, drawn
 level by level and seen before it is built; a motion prototype tried on
 real devices; the build and its hardening at a preview address; launch.
 
