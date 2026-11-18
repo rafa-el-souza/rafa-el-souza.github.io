@@ -358,7 +358,7 @@ in the content files.
 address is also visible text, with a control that copies it. There is no
 form. The colophon says in a line or two how the site is made and links to
 this repository; the privacy note says in one paragraph what FR-23 and §7
-make true; the licence line says what may be reused (OD-2).
+make true; the licence line says what may be reused (decision 10).
 - Given the last level, When the copy control is activated, Then the
   clipboard holds the address, and the control says so in the page's
   language, to assistive technology too.
@@ -367,8 +367,8 @@ make true; the licence line says what may be reused (OD-2).
 the Portuguese file on the Portuguese page, the English one on the English
 page. The Spanish page offers the English file and says in which language
 it is (OD-5). A file's name starts with the author's name as shown on the
-page (OD-3) and ends with the language; files are replaced in place and
-their addresses never change. They obey §7's rule on personal data.
+page (decision 11) and ends with the language; files are replaced in place
+and their addresses never change. They obey §7's rule on personal data.
 - Given `/en/`, Then the CV action points to the English PDF under `/cv/`,
   and the answer is a PDF.
 
@@ -523,7 +523,9 @@ entrance's flag before the first paint; the build writes its hash into the
 page's Content Security Policy (§7). Links between pages and to assets are
 relative, so the same build works at the root and under the preview path;
 the canonical, alternate and preview-image addresses are absolute and
-always name the final addresses.
+always name the final addresses. `/404.html` is the exception: the host
+serves it at any unknown path, however deep, so its links and its
+stylesheet start from the root.
 
 ### 6.3 The content model
 
@@ -689,13 +691,11 @@ says which; until then nothing here is chosen.
 - **OD-1 The counting service.** Recommended: GoatCounter's hosted service,
   with its script served from this site; the alternative is to count
   nothing.
-- **OD-2 The licence of what is not code.** The code is under MIT
-  (`LICENSE`). For the texts, the CV files and the visual identity, the
-  recommendation is all rights reserved, said in the licence line of the
-  last level.
-- **OD-3 The name as shown** on the page and in the CV files' names.
-- **OD-4 The availability line:** what it says, and that it carries a date.
 - **OD-5 The CV on the Spanish page:** the English file, or a Spanish one.
+
+**Decided since** (2026-11-18): OD-2, the licence of what is not code
+(decision 10); OD-3, the name as shown (decision 11); OD-4, the
+availability line (decision 12).
 
 ---
 

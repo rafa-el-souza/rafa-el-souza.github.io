@@ -2,8 +2,8 @@
 
 The landing page of Rafa Souza, backend developer: six full-screen levels
 shown one at a time, in Portuguese, English and Spanish, in a light and a
-dark theme, static on GitHub Pages. This repository holds its design and
-its decisions; its source arrives with the first slice of work.
+dark theme, static on GitHub Pages. This repository holds its source, its
+design and its decisions.
 
 The site will answer at <https://rafasouza.dev.br>.
 
@@ -17,15 +17,16 @@ sites ([Balcão](https://github.com/rafa-el-souza/balcao) and
 [Pendulum](https://github.com/rafa-el-souza/pendulum)), how the work is
 done, the path so far.
 
-## How it will be built
+## How it is built
 
 TypeScript with no UI framework and no runtime dependency; Vite; the HTML
-of each language made at build time, so that the page reads without
-JavaScript. In Claude Code sessions, following [`CLAUDE.md`](CLAUDE.md):
-each slice of work is one pull request, merged once CI is green. CI will
-run the types, the lint, the unit tests and every journey in three browser
-engines, and scan every commit for secrets; on `main`, once all of it
-passes, it will publish the tested build.
+of each language made at build time, from templates and one content module
+per language, so that the page reads without JavaScript. In Claude Code
+sessions, following [`CLAUDE.md`](CLAUDE.md): each slice of work is one
+pull request, merged once CI is green. CI runs the types, the lint, the
+unit tests and every journey in three browser engines, and scans every
+commit for secrets; on `main`, once all of it passes, it publishes the
+tested build to GitHub Pages.
 
 Read, in this order:
 
@@ -40,19 +41,33 @@ Read, in this order:
 
 ## Status
 
-Design written (2026-11-18). Nothing is built yet. The plan, in
-`docs/design.md` §9: a sober page first, so that the domain answers; then
-the design, drawn level by level and seen before it is built; a motion
-prototype tried on real devices; the build and its hardening at a preview
-address; launch.
+Design written (2026-11-18). Built: the toolchain, CI and the sober page,
+a plain page in the three languages that the domain serves until launch
+(`docs/design.md`, FR-24). Next, in `docs/design.md` §9: the design, drawn
+level by level and seen before it is built; a motion prototype tried on
+real devices; the build and its hardening at a preview address; launch.
 
 ## Running the checks
 
-To be written with the first slice: Node, `npm ci`, and the scripts for the
-type check, the lint, the unit tests, the build and the browser journeys.
+Node, at the version in [`.nvmrc`](.nvmrc), then `npm ci` (no install
+script runs: [`.npmrc`](.npmrc)). Each check is a script:
+
+| Script | What it does |
+|---|---|
+| `npm run typecheck` | the type check, which also holds the three languages to one shape |
+| `npm run lint` | ESLint, with no warning allowed |
+| `npm run format:check` | Prettier, over everything but the documents |
+| `npm test` | the unit tests, among them those that read a build of the site: its tags, its policy, its weight |
+| `npm run build` | the site, into `dist/` |
+| `npm run e2e` | every journey in Chromium, Firefox and WebKit, against the build served as GitHub Pages serves it; `npm run e2e:browsers` installs the engines |
+| `npm run images` | redraws the preview images in `public/og/`, in Chromium |
+
+Once per clone, `git config core.hooksPath .githooks` turns on the
+pre-commit hook, which scans the staged changes with gitleaks and lints
+staged workflows with actionlint.
 
 ## Licence
 
-The code is under the MIT licence ([`LICENSE`](LICENSE)). The licence of
-the texts, the CV files and the visual identity is still to be decided
-(`docs/design.md`, OD-2); until it is, they are not licensed for reuse.
+The code is under the MIT licence ([`LICENSE`](LICENSE)). The texts, the CV
+files and the visual identity are not licensed for reuse: all rights
+reserved (`docs/decisions.md`, decision 10).
