@@ -44,3 +44,9 @@ ul {
 li + li {
   margin-block-start: 0.5rem;
 }
+
+/* the language the page is in reads as text among the language links */
+a[aria-current="page"] {
+  color: inherit;
+  text-decoration: none;
+}
